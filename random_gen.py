@@ -99,7 +99,7 @@ stream = convert_to_stream(duration_list)
 # stream.show()
 
 # play the stream
-# stream.show('midi')
+stream.show('midi')
 
 # print with map_beats convertion
 print('random song with map_beats: ')
