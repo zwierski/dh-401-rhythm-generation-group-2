@@ -1,9 +1,9 @@
 import random
 import music21
 
+random.seed(1113)
+
 # fun to fill a bar with random notes
-
-
 def random_bar():
     first = True
     # first decide how many notes are in the bar
@@ -12,7 +12,7 @@ def random_bar():
     for i in range(11):
         # decide if a note is played
         if first:
-            bar.append(1.0)
+            # bar.append(1.0)
             first = False
         elif random.randint(0, 4) < 2:  # 40% chance of a note to not collapse  a bar
             # if yes, decide which note
@@ -62,8 +62,8 @@ def convert_to_duration(random_song_list):
 
 # example
 duration_list = convert_to_duration(random_song)
-print('duration list: ')
-print(duration_list)
+# print('duration list: ')
+# print(duration_list)
 
 # convert duration list into music21 stream
 
@@ -82,6 +82,16 @@ def convert_to_stream(duration_list):
         stream.append(note)
     return stream
 
+# Function that maps the beat distribution of a bar to a series of numbers between 1 and 12 (position of each sixteenth-note in the bar)
+def map_beats(notes):
+    notes_mapped = []
+    for bar in notes:
+        bar_mapped = []
+        for x in bar:
+            bar_mapped.append(int(4*(x-1)+1))
+        notes_mapped.append(bar_mapped)
+    return notes_mapped
+
 
 # example
 stream = convert_to_stream(duration_list)
@@ -89,4 +99,8 @@ stream = convert_to_stream(duration_list)
 # stream.show()
 
 # play the stream
-stream.show('midi')
+# stream.show('midi')
+
+# print with map_beats convertion
+print('random song with map_beats: ')
+print(map_beats(random_song))
