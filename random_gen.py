@@ -62,8 +62,8 @@ def convert_to_duration(random_song_list):
 
 # example
 duration_list = convert_to_duration(random_song)
-# print('duration list: ')
-# print(duration_list)
+print('duration list: ')
+print(duration_list)
 
 # convert duration list into music21 stream
 
