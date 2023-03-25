@@ -5,14 +5,15 @@ random.seed(1113)
 
 # fun to fill a bar with random notes
 def random_bar():
-    first = True
+    # first = True
+    first = False
     # first decide how many notes are in the bar
     # (the tempo is always 3/4)
     bar = []
     for i in range(11):
         # decide if a note is played
         if first:
-            # bar.append(1.0)
+            bar.append(1.0)
             first = False
         elif random.random() < 0.5:
             # if yes, decide which note
@@ -107,5 +108,4 @@ stream.show('midi')
 
 # print with map_beats convertion
 print('random song with map_beats: ')
-print(random_song)
 print(map_beats(random_song))
