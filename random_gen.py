@@ -14,7 +14,7 @@ def random_bar():
         if first:
             # bar.append(1.0)
             first = False
-        elif random.randint(0, 4) < 2:  # 40% chance of a note to not collapse  a bar
+        elif random.random() < 0.5:
             # if yes, decide which note
             bar.append((i/4)+1)
         # check that the bar is not empty
@@ -57,6 +57,10 @@ def convert_to_duration(random_song_list):
         last += 4.0
     # reverse the list again
     duration_list.reverse()
+    # return original order to original song aswell
+    random_song_list.reverse()
+    for bar in random_song_list:
+        bar.reverse()
     return duration_list
 
 
@@ -103,4 +107,5 @@ stream.show('midi')
 
 # print with map_beats convertion
 print('random song with map_beats: ')
+print(random_song)
 print(map_beats(random_song))
