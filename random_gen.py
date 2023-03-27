@@ -1,5 +1,6 @@
 import random
 import music21
+import pandas as pd
 
 random.seed(1113)
 
@@ -109,3 +110,15 @@ stream.show('midi')
 # print with map_beats convertion
 print('random song with map_beats: ')
 print(map_beats(random_song))
+
+# produce a dataframe size 500 samples and save it as csv
+def produce_dataframe():
+    df = pd.DataFrame()
+    for i in range(500):
+        random_song = create_random_song()
+        df = df.append({'id': i, 'notes': map_beats(random_song)}, ignore_index=True)
+    df.to_csv('random_songs.csv', index=False)
+    return df
+
+# example
+df = produce_dataframe()
