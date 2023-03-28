@@ -1,11 +1,13 @@
 import random
 import music21
+import pandas as pd
+
+random.seed(1113)
 
 # fun to fill a bar with random notes
-
-
 def random_bar():
-    first = True
+    # first = True
+    first = False
     # first decide how many notes are in the bar
     # (the tempo is always 3/4)
     bar = []
@@ -14,7 +16,7 @@ def random_bar():
         if first:
             bar.append(1.0)
             first = False
-        elif random.randint(0, 4) < 2:  # 40% chance of a note to not collapse  a bar
+        elif random.random() < 0.5:
             # if yes, decide which note
             bar.append((i/4)+1)
         # check that the bar is not empty
@@ -57,6 +59,10 @@ def convert_to_duration(random_song_list):
         last += 4.0
     # reverse the list again
     duration_list.reverse()
+    # return original order to original song aswell
+    random_song_list.reverse()
+    for bar in random_song_list:
+        bar.reverse()
     return duration_list
 
 
@@ -82,6 +88,16 @@ def convert_to_stream(duration_list):
         stream.append(note)
     return stream
 
+# Function that maps the beat distribution of a bar to a series of numbers between 1 and 12 (position of each sixteenth-note in the bar)
+def map_beats(notes):
+    notes_mapped = []
+    for bar in notes:
+        bar_mapped = []
+        for x in bar:
+            bar_mapped.append(int(4*(x-1)+1))
+        notes_mapped.append(bar_mapped)
+    return notes_mapped
+
 
 # example
 stream = convert_to_stream(duration_list)
@@ -90,3 +106,19 @@ stream = convert_to_stream(duration_list)
 
 # play the stream
 stream.show('midi')
+
+# print with map_beats convertion
+print('random song with map_beats: ')
+print(map_beats(random_song))
+
+# produce a dataframe size 500 samples and save it as csv
+def produce_dataframe():
+    df = pd.DataFrame()
+    for i in range(500):
+        random_song = create_random_song()
+        df = df.append({'id': i, 'notes': map_beats(random_song)}, ignore_index=True)
+    df.to_csv('random_songs.csv', index=False)
+    return df
+
+# example
+df = produce_dataframe()
