@@ -6,4 +6,4 @@ Our outputs are located inside Dataframes saved as csv files: 'random_songs.csv'
 
 ./abc contains copies of the abc files of the original dataset 
 
-The other csv files correspond to the training data, test data... according to their names. The reason we have some files named "*_all.csv" is due to 1 or 2 pieces in the original csv files containing empty bars. These pieces caused bugs in the metric evaluation, and thus we removed them to create the "*_all.csv" files used in parts of the evaluation.
+The other csv files correspond to the training data, test data... according to their names. The reason we have some files named "\*_all.csv" is due to 1 or 2 pieces in the original csv files containing empty bars. These pieces caused bugs in the metric evaluation, and thus we removed them to create the "\*_all.csv" files used in parts of the evaluation.
